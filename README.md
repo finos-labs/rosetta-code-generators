@@ -6,15 +6,17 @@ draft: false
 weight: 3
 ---
 
+DCO Test
+
 # Rosetta Code Generators
 
 **Continuous Integration:** [![Codefresh build status](https://g.codefresh.io/api/badges/pipeline/regnosysops/REGnosys%2Frosetta-code-generators%2Frosetta-code-generators?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWE1N2EyYTlmM2JiOTMwMDAxNDRiODMz.ZDeqVUhB-oMlbZGj4tfEiOg0cy6azXaBvoxoeidyL0g&type=cf-1)](https://g.codefresh.io/pipelines/rosetta-code-generators/builds?repoOwner=REGnosys&repoName=rosetta-code-generators&serviceName=REGnosys%2Frosetta-code-generators&filter=trigger:build~Build;branch:master;pipeline:5d0a15a6a52a3deca9db7236~rosetta-code-generators)
 
- **License:** [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0)
+**License:** [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0)
 
-**JavaDoc:** *Coming soon*
+**JavaDoc:** _Coming soon_
 
-Do you want to adopt a technical standard expressed as a domain model in the *Rosetta DSL*, but in a language other than the default (Java) distribution? You can use this guide to write your own *code generator* in the language of your choosing.
+Do you want to adopt a technical standard expressed as a domain model in the _Rosetta DSL_, but in a language other than the default (Java) distribution? You can use this guide to write your own _code generator_ in the language of your choosing.
 
 ## Pre-reqs
 
@@ -38,7 +40,7 @@ The mechanism is also future-proof to future version updates of the model. Distr
 
 ## What Code Generators Are Available?
 
-[Rosetta](https://docs.rosetta-technology.io/rosetta/rosetta-dsl) is an open source *Domain-Specific Language* (DSL) comprising a *syntax* (or *grammar*) and a set of code generators. The [Rosetta DSL repository](https://github.com/REGnosys/rosetta-dsl) features one built-in code generator:
+[Rosetta](https://docs.rosetta-technology.io/rosetta/rosetta-dsl) is an open source _Domain-Specific Language_ (DSL) comprising a _syntax_ (or _grammar_) and a set of code generators. The [Rosetta DSL repository](https://github.com/REGnosys/rosetta-dsl) features one built-in code generator:
 
 - [Java](https://www.oracle.com/java/) (only Java 11 supported)
 
@@ -53,11 +55,11 @@ The [Rosetta Code Generator repository](https://github.com/REGnosys/rosetta-code
 
 ## How Does It Work?
 
-Code generation consists in *translating* from the Rosetta DSL syntax into the syntax of the chosen programming language.
+Code generation consists in _translating_ from the Rosetta DSL syntax into the syntax of the chosen programming language.
 
-The Rosetta DSL is based on the [Eclipse Modelling Framework](https://www.eclipse.org/modeling/emf/). Code generation works by allowing API hooks to access an [Ecore](https://wiki.eclipse.org/Ecore) representation of the model. The API expects a set *.rosetta* files as input. The files are parsed using an [ANTLR](https://www.antlr.org/)-generated parser and an Ecore model instance is produced. This Ecore model is then accessible via an API hook in this repository.
+The Rosetta DSL is based on the [Eclipse Modelling Framework](https://www.eclipse.org/modeling/emf/). Code generation works by allowing API hooks to access an [Ecore](https://wiki.eclipse.org/Ecore) representation of the model. The API expects a set _.rosetta_ files as input. The files are parsed using an [ANTLR](https://www.antlr.org/)-generated parser and an Ecore model instance is produced. This Ecore model is then accessible via an API hook in this repository.
 
-*Ecore* is a representation of a [syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree), which contains the entire information about a given model. Ecore therefore acts the pivot that allows to transform the model originally expressed in the Rosetta DSL into the model expressed in the chosen programming language. Code generation is based on [Xtext](https://www.eclipse.org/Xtext/) and the Rosetta DSL itself is expressed using Xtext.
+_Ecore_ is a representation of a [syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree), which contains the entire information about a given model. Ecore therefore acts the pivot that allows to transform the model originally expressed in the Rosetta DSL into the model expressed in the chosen programming language. Code generation is based on [Xtext](https://www.eclipse.org/Xtext/) and the Rosetta DSL itself is expressed using Xtext.
 
 Here is an illustration of how code generation works:
 
@@ -71,7 +73,7 @@ You will need [Maven](http://maven.apache.org/) and [Git](https://git-scm.com/) 
 
 [Fork and clone](https://help.github.com/articles/fork-a-repo) the project in your own workspace. Then run the first build:
 
-``` Java
+```Java
 /path/to/workspace/rosetta-code-generators > mvn clean install
 ```
 
@@ -79,7 +81,7 @@ This project follows the Maven [multi-module](https://maven.apache.org/guides/mi
 
 Simply come up with a sensible name for your module (it should relate to the progamming language that you want to generate code in) and run the following command:
 
-``` Java
+```Java
 > mvn archetype:generate -DgroupId=com.regnosys.rosetta.code-generators  -DartifactId=my-language
 ```
 
@@ -87,15 +89,15 @@ This will create a module named after your artifactId with the appropriate maven
 
 ### Writing a generator
 
-There is already an example module named *sample* to help you get going: we have written a rudimentary code generator (that generates some valid [Groovy](https://groovy-lang.org/) code):
+There is already an example module named _sample_ to help you get going: we have written a rudimentary code generator (that generates some valid [Groovy](https://groovy-lang.org/) code):
 
-``` Java
+```Java
 sample/src/main/java/com/regnosys/rosetta/generators/sample/SampleCodeGenerator.java
 ```
 
 Within your just created module, create your own package under `com/regnosys/rosetta/generators` and add your source file(s). Your generator must subclass the `AbstractExternalGenerator` class and provide a concrete implementation of its `generate` method.
 
-``` Java
+```Java
 public abstract Map<String, ? extends CharSequence> generate(RosettaJavaPackages packages, List<RosettaRootElement> elements, String version);
 ```
 
@@ -103,7 +105,7 @@ public abstract Map<String, ? extends CharSequence> generate(RosettaJavaPackages
 
 You can then test your code with a JUnit test, like in
 
-``` Java
+```Java
 sample/src/test/java/com/regnosys/rosetta/generators/sample/SampleCodeGeneratorTest.java
 ```
 
